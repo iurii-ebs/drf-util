@@ -105,7 +105,8 @@ class RestoreUserPassword(GenericAPIView):
         return Response({"valid": True})
 ```
 ##### await_process_decorator
-Decorator for creating a queue for using a function, it is needed to adjust the call of a function from different processes (Сelery, Threads).
+Decorator for creating a queue for using a function, it is needed to adjust the call of a function from different processes.
+If you run your tasks asynchronously, they are part of different processes which means that because of the LocMemCache backend, the task and the view will not use the same storage (each has its own memory).
 For example, this decorator can be used to limit the number of requests in the parser. 
   
 Definition:

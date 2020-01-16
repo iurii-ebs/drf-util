@@ -72,7 +72,10 @@ def set_await(key, seconds):
 
 def await_process_decorator(rate=20, period=60):
     """
-    decorator for some function, checking and updating time to waiting for use this function
+    Decorator for some function, checking and updating time to waiting for use this function
+    If you run your tasks asynchronously,
+    they are part of different processes which means that because of the LocMemCache backend,
+    the task and the view will not use the same storage (each has its own memory).
     @param {integer} rate : count of usage some function, by default it's 20 times
     @param {integer} period : period of usage some function,  by default it's 1 minute
     """
